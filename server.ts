@@ -89,6 +89,6 @@
      : "port " + addr!.port;
    console.info("Listening on " + bind);
  
-   debug("portafolio:server")("Listening on " + bind);
+   debug("server")("Listening on " + bind);
  }
  

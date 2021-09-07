@@ -1,10 +1,26 @@
 import IDataService from "../interfaces/dataService.interface";
-import { Types } from 'mongoose';
+import { Types } from "mongoose";
 import { IItem, Item } from "../models";
 
 class ItemService implements IDataService<IItem> {
-  public getAll() {
-    return Item.find().exec();
+  public async getAll(pageNumber: number, pageSize: number) {
+    const pageNumberCalculated = pageNumber * pageSize || 0;
+    const pipeline = [
+      {
+        $facet: {
+          paginatedResults: [
+            { $skip: pageNumberCalculated },
+            { $limit: pageSize },
+          ],
+          totalCount: [
+            {
+              $count: "count",
+            },
+          ],
+        },
+      },
+    ];
+    return await Item.aggregate(pipeline);
   }
 
   public get(id: string) {

@@ -8,7 +8,8 @@ class ItemsController {
 
     public getItems: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const items = await this.itemService.getAll();
+            console.log(req.query);
+            const items = await this.itemService.getAll(Number(req.query.pageNumber), Number(req.query.pageSize));
             res.send(items);
         } catch (error) {
             next(createError(500));
