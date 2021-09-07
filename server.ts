@@ -1,17 +1,94 @@
-import compression from "compression";
-import cookieParser from "cookie-parser";
-import express from "express";
-import logger from "morgan";
-import apiRoutes from "./src/api";
+#!/usr/bin/env node
 
-const app = express();
-
-app.use(logger("dev"));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(compression());
-
-app.use("/api", apiRoutes);
-
-export default app;
+/**
+ * Module dependencies.
+ */
+ import { debug } from "debug";
+ import http from "http";
+ import app from "./src/app";
+ import { databaseInit } from "./src/mongo/initDb";
+ 
+ /**
+  * Get port from environment and store in Express.
+  */
+ 
+ const normalizedPort = normalizePort(process.env.PORT || "3000");
+ app.set("port", normalizedPort);
+ 
+ /**
+  * Create HTTP server.
+  */
+ 
+ databaseInit();
+ const server = http.createServer(app);
+ 
+ /**
+  * Listen on provided port, on all network interfaces.
+  */
+ 
+ server.listen(normalizedPort);
+ server.on("error", onError);
+ server.on("listening", onListening);
+ 
+ /**
+  * Normalize a port into a number, string, or false.
+  */
+ 
+ function normalizePort(val: string) {
+   const port = parseInt(val, 10);
+ 
+   if (isNaN(port)) {
+     // named pipe
+     return val;
+   }
+ 
+   if (port >= 0) {
+     // port number
+     return port;
+   }
+ 
+   return false;
+ }
+ 
+ /**
+  * Event listener for HTTP server "error" event.
+  */
+ 
+ function onError(error: any) {
+   if (error.syscall !== "listen") {
+     throw error;
+   }
+ 
+   const bind = typeof normalizedPort === "string"
+     ? "Pipe " + normalizedPort
+     : "Port " + normalizedPort;
+ 
+   // handle specific listen errors with friendly messages
+   switch (error.code) {
+     case "EACCES":
+         console.error(bind + " requires elevated privileges");
+         process.exit(1);
+         break;
+     case "EADDRINUSE":
+         console.error(bind + " is already in use");
+         process.exit(1);
+         break;
+     default:
+         throw error;
+   }
+ }
+ 
+ /**
+  * Event listener for HTTP server "listening" event.
+  */
+ 
+ function onListening() {
+   const addr = server.address();
+   const bind = typeof addr === "string"
+     ? "pipe " + addr!
+     : "port " + addr!.port;
+   console.info("Listening on " + bind);
+ 
+   debug("portafolio:server")("Listening on " + bind);
+ }
+ 

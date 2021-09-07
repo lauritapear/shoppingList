@@ -47,7 +47,7 @@ class ItemsController {
         try {
             const itemToUpdate: IItem = {
                 _id: req.params.id,
-                ...req.body.updatedFields
+                ...req.body
             };
 
             const updatedItem = await this.itemService.update(itemToUpdate);
@@ -59,6 +59,7 @@ class ItemsController {
 
     public deleteItem: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
         try {
+            console.log(req.params.id)
             const deletedItem = await this.itemService.delete(req.params.id);
             res.send(deletedItem);
         } catch (error) {
