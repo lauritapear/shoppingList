@@ -1,6 +1,7 @@
-node_modules/
+server/node_modules/
 .vscode/
 .DS_Store
-coverage/
-dist/
-.env.*
+server/coverage/
+server/dist/
+server/.env.*
+./
