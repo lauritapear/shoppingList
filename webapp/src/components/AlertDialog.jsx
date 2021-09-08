@@ -7,7 +7,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { makeStyles } from "@material-ui/core/styles";
 
-export default function AlertDialog() {
+export default function AlertDialog(props) {
     const useStyles = makeStyles((theme) => ({
         container: {
           display: "flex",

@@ -1,29 +1,46 @@
-import React, { Component } from 'react';
-import {
-  Grid
-} from '@material-ui/core';
-import Header from './components/Header';
-import FormDrawer from './components/FormDrawer'
-import Content from './components/Content'
-import ShoppingListItem from './components/ShoppingListItem'
-import AlertDialog from './components/AlertDialog'
+import React, { Component } from "react";
+import { Grid } from "@material-ui/core";
+import { connect } from "react-redux";
+import * as actionCreators from "./store/actions/index";
+import Header from "./components/Header";
+import FormDrawer from "./components/FormDrawer";
+import Content from "./components/Content";
+import ShoppingList from "./components/ShoppingList";
+// import AlertDialog from "./components/AlertDialog";
 class App extends Component {
+  componentDidMount() {
+    this.props.getItems(0,20);
+  }
   render() {
-  return (
-    <Grid container direction="column">
-      <Header />
-      <FormDrawer />
-      <Content />
-      <ShoppingListItem
-          // key={item.id}
-          // item={item}
-          // toggleItemChecked={toggleItemChecked(item.id)}
-          // openItemEditDialog={openItemEditDialog(item)}
+    let contentItem = null;
+  
+    if(this.props.itemsData === 0 ) {
+      contentItem = <Content onToggleOpen={this.props.toggleOpenDrawer} />
+    }else{
+      contentItem = <ShoppingList items={this.props.itemsData} openEditForm={this.props.toggleOpenDrawer} />
+    }
+    return (
+      <Grid container direction="column">
+        <Header />
+        <FormDrawer
+          open={this.props.openDrawer}
+          onToggleOpen={this.props.toggleOpenDrawer}
+          formAction={this.props.formAction}
         />
-        <AlertDialog />
-    </Grid>
-  );
+        <div>{contentItem}</div>
+      </Grid>
+    );
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    loading: state.itemReducer.loading,
+    error: state.itemReducer.error,
+    itemsData: state.itemReducer.itemsData,
+    openDrawer: state.itemReducer.openDrawer,
+    formAction: state.itemReducer.formAction
+  };
+}
+
+export default connect(mapStateToProps, actionCreators)(App);

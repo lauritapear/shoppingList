@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React from "react";
 import {
   Button,
   TextField,
@@ -58,35 +58,24 @@ export default function ItemForm(props) {
     },
   }));
 
-  const [formInput, setFormInput] = useReducer(
-    (state, newState) => ({ ...state, ...newState }),
-    {
-      name: "",
-      description: "",
+  
+
+  const handleSubmit = () => {
+    if(props.formAction === 'Add'){
+      props.createItem("tomate","tomate");
+    }else{
+      props.updateItem("tomate","tomate");
     }
-  );
+    
+  };
 
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
-
-    let data = { formInput };
-
-    fetch("https://pointy-gauge.glitch.me/api/form", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((response) => console.log("Success:", JSON.stringify(response)))
-      .catch((error) => console.error("Error:", error));
+  const handleCancel = () => {
+    props.onCancel();
   };
 
   const handleInput = (evt) => {
-    const name = evt.target.name;
-    const newValue = evt.target.value;
-    setFormInput({ [name]: newValue });
+    // const name = evt.target.name;
+    // const newValue = evt.target.value;
   };
 
   const classes = useStyles();
@@ -98,10 +87,10 @@ export default function ItemForm(props) {
       <div className={classes.container}>
         <div className={classes.paper}>
           <Typography variant="h5" component="h3">
-            {props.formName} an Item
+            {props.formAction} an Item
           </Typography>
           <Typography component="p">
-            {props.formName} your item below
+            {props.formAction} your item below
           </Typography>
         </div>
         <form onSubmit={handleSubmit}>
@@ -150,7 +139,7 @@ export default function ItemForm(props) {
           </div>
           <div className={classes.buttonContainer}>
             <div className={classes.paper}>
-              <Button className={classes.button}>Cancel</Button>
+              <Button className={classes.button} onClick={handleCancel}>Cancel</Button>
             </div>
             <div className={classes.paper}>
               <Button

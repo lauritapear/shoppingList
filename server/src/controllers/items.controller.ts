@@ -40,6 +40,7 @@ class ItemsController {
             const createdItem = await this.itemService.create(newItem);
             res.send(createdItem);
         } catch (error) {
+            console.log(error);
             next(createError(500));
         }
     }

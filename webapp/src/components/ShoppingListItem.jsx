@@ -11,6 +11,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 import { makeStyles } from "@material-ui/core/styles";
+// import AlertDialog from "./AlertDialog";
 
 export default function ShoppingListItem(props) {
   const useStyles = makeStyles((theme) => ({
@@ -27,15 +28,20 @@ export default function ShoppingListItem(props) {
 
   const classes = useStyles();
 
+  const handleEdit = () => {
+    props.openEditForm();
+    props.setFormAction("Edit");
+  };
+
   return (
-    <ListItem>
+    <ListItem id={props.item.id}>
       <ListItemAvatar>
         <Checkbox color="primary" />
       </ListItemAvatar>
-      <ListItemText primary="Single-line item" secondary="Secondary text" />
+      <ListItemText primary={props.item.name} secondary={props.item.description} />
       <div className={classes.buttonContainer}>
         <ListItemSecondaryAction className={classes.secondaryAction}>
-          <IconButton edge="end" aria-label="delete">
+          <IconButton edge="end" aria-label="delete" onClick={handleEdit}>
             <EditOutlinedIcon />
           </IconButton>
         </ListItemSecondaryAction>
