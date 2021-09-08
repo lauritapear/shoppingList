@@ -5,7 +5,8 @@ import {
 import Header from './components/Header';
 import FormDrawer from './components/FormDrawer'
 import Content from './components/Content'
-
+import ShoppingListItem from './components/ShoppingListItem'
+import AlertDialog from './components/AlertDialog'
 class App extends Component {
   render() {
   return (
@@ -13,6 +14,13 @@ class App extends Component {
       <Header />
       <FormDrawer />
       <Content />
+      <ShoppingListItem
+          // key={item.id}
+          // item={item}
+          // toggleItemChecked={toggleItemChecked(item.id)}
+          // openItemEditDialog={openItemEditDialog(item)}
+        />
+        <AlertDialog />
     </Grid>
   );
   }
