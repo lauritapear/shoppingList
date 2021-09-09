@@ -11,14 +11,12 @@ class App extends Component {
   componentDidMount() {
     this.props.getItems(0,20);
   }
-  componentShouldUpdate() {
-    this.props.getItems(0,20);
-  }
+  
   render() {
     let contentItem = null;
   
     if(this.props.itemsData.length === 0 ) {
-      contentItem = <Content onToggleOpen={this.props.toggleOpenDrawer} updateFormType={this.props.updateFormType}/>
+      contentItem = <Content onToggleOpen={this.props.toggleOpenDrawer} updateFormType={this.props.updateFormType} loading={this.props.loading}/>
       // contentItem = <Content {...this.props}/>
     }else{
     //   // contentItem = <ShoppingList items={this.props.itemsData} openEditForm={this.props.toggleOpenDrawer} formAction={this.props.formType} />

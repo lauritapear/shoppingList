@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ShoppingListItem from "./ShoppingListItem";
 import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import AlertDialog from "./AlertDialog";
+import Spinner from "./Spinner";
 
 export default function ShoppingList(props) {
   const useStyles = makeStyles((theme) => ({
@@ -22,7 +23,26 @@ export default function ShoppingList(props) {
     secondaryAction: {
       paddingRight: 48,
     },
+    listTitle: {
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+      width: "80%",
+      margin: "0 auto",
+      justifyContent: "space-between"
+    },
+    content: {
+      display: "flex",
+      flexDirection: "column",
+    },
   }));
+
+  useEffect(() => {
+    // const subscription = props.source.subscribe();
+
+    console.log("checked", props.clickedItem);
+  }, [props.clickedItem]);
+
   const classes = useStyles();
   const [openDialog, setOpenDialog] = React.useState(false);
   const handleOpenDialogToggle = () => {
@@ -33,10 +53,11 @@ export default function ShoppingList(props) {
   const handleItemClick = (item) => {
     setClickedItem(item);
     props.updateItemID(item.id);
+    console.log("item clicked", item);
   };
 
   const handleAddItem = () => {
-    props.updateFormType('Add');
+    props.updateFormType("Add");
     props.toggleOpenDrawer();
   };
 
@@ -44,12 +65,11 @@ export default function ShoppingList(props) {
     setOpenDialog(!openDialog);
     props.deleteItem(clickedItem.id);
   };
-
-  // const handleEditItem = () => {
-    // console.log("HAndleEdit", props.itemID);
-    // handleItemClick(item);
-    // props.editItem(clickedItem.name, clickedItem.description, props.itemID);
-  // };
+  const handleChecked = (item) => {
+    // console.log("checked ", Boolean(item.done));
+    // console.log("negation ", !item.done);
+    props.updateItem(item.name, item.description, !item.done, item.id);
+  };
 
   let list = props.itemsData.map((item, index) => (
     <ShoppingListItem
@@ -59,26 +79,42 @@ export default function ShoppingList(props) {
       updateFormType={props.updateFormType}
       toggleOpenDrawer={props.toggleOpenDrawer}
       onDelete={handleOpenDialogToggle}
-      // handleEdit={handleEditItem}
+      handleChecked={() => handleChecked(item)}
       handleItemClick={() => handleItemClick(item)}
     />
   ));
-  return (
-    <div className={classes.container}>
-      <Button
-        variant="contained"
-        color="primary"
-        className={classes.button}
-        onClick={handleAddItem}
-      >
-        Add Item
-      </Button>
-      {list}
-      <AlertDialog
-        openDialog={openDialog}
-        handleDelete={handleDelete}
-        toggleDialog={handleOpenDialogToggle}
-      />
-    </div>
-  );
+
+  let content = null;
+  if (props.loading) {
+    content = (
+      <div>
+        <Spinner />
+      </div>
+    );
+  } else {
+    content = 
+    <>
+      <div className={classes.listTitle}>
+        <h2>Your Items</h2>
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          onClick={handleAddItem}
+        >
+          Add Item
+        </Button>
+        </div>
+        <div className={classes.container}>
+          {list}
+          <AlertDialog
+            openDialog={openDialog}
+            handleDelete={handleDelete}
+            toggleDialog={handleOpenDialogToggle}
+          />
+        </div>
+      </>
+  }
+
+  return <div className={classes.content}>{content}</div>;
 }

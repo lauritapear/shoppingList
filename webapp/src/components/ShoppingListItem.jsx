@@ -25,32 +25,56 @@ export default function ShoppingListItem(props) {
     secondaryAction: {
       paddingRight: 48,
     },
+    text: {
+      textDecoration: "line-through"
+    },
     frame: {
       display: "flex",
       marginTop: 10,
       minHeight: 100
+    },
+    frameColored: {
+      display: "flex",
+      marginTop: 10,
+      minHeight: 100,
+      backgroundColor: "ghostwhite",
+      border: "0"
     }
+
   }));
 
   const classes = useStyles();
+  // const [checked, setChecked] = React.useState([0]);
+
+  // const handleToggle = (value) => () => {
+  //   const currentIndex = checked.indexOf(value);
+  //   const newChecked = [...checked];
+
+  //   if (currentIndex === -1) {
+  //     newChecked.push(value);
+  //   } else {
+  //     newChecked.splice(currentIndex, 1);
+  //   }
+
+  //   setChecked(newChecked);
+  //   console.log(newChecked);
+  // };
 
   const handleEdit = () => {
     props.updateFormType('Edit');
     props.toggleOpenDrawer();
   };
 
-  // const handleDelete =(item)=>{
-  //   console.log(item);
-  //   props.onDelete();
-  //   // props.handleDelete(item);
-  // }
   return (
-    <Paper elevation={0} variant="outlined" className={classes.frame}>
-      <ListItem id={props.item.id} onClick={props.handleItemClick} button>
+    <Paper elevation={0} variant="outlined" className={props.item.done ?classes.frameColored:classes.frame}>
+      <ListItem id={props.item.id} onClick={props.handleItemClick}>
         <ListItemAvatar>
-          <Checkbox color="primary" />
+          <Checkbox color="primary" 
+          checked={props.item.done}
+          onChange={props.handleChecked}
+                />
         </ListItemAvatar>
-        <ListItemText primary={props.item.name} secondary={props.item.description} />
+        <ListItemText  className= {props.item.done ? classes.text : null }primary={props.item.name} secondary={props.item.description} />
         <div className={classes.buttonContainer}>
           <ListItemSecondaryAction className={classes.secondaryAction}>
             <IconButton edge="end" aria-label="delete" onClick={handleEdit}>

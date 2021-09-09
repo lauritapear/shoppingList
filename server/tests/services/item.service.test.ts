@@ -49,6 +49,7 @@ describe("Items Service", () => {
     const itemToCreate = {
       name: "newItem",
       description: "new Item Description",
+      done: false
     } as unknown as IItem;
 
     const result = await ItemService.create(itemToCreate);

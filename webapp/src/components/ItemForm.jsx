@@ -65,7 +65,7 @@ export default function ItemForm(props) {
     if(props.formAction === 'Add'){
       props.onAddItem(name,description);
     }else if(props.formAction === 'Edit'){
-      props.onUpdateItem(name,description, props.itemID);
+      props.onUpdateItem(name,description, false, props.itemID);
     }
   };
 
@@ -74,8 +74,6 @@ export default function ItemForm(props) {
   };
 
   const classes = useStyles();
-
-  console.log(props);
 
   return (
     <div className={classes.root}>

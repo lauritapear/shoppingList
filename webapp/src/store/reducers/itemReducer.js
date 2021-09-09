@@ -34,7 +34,6 @@ function handleItemIdUpdate(state, id){
 }
 
 function setItems(state, itemsData) {
-  console.log(itemsData);
   let sortedData = itemsData;
   let newData = [];
   sortedData.forEach((element) => {
@@ -42,6 +41,7 @@ function setItems(state, itemsData) {
       id: element._id,
       name: element.name,
       description: element.description,
+      done: (element.done === 'true')
     });
   });
   return updateObject(state, {

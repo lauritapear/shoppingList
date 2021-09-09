@@ -8,7 +8,6 @@ class ItemsController {
 
     public getItems: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            console.log(req.query);
             const items = await this.itemService.getAll(Number(req.query.pageNumber), Number(req.query.pageSize));
             res.send(items);
         } catch (error) {
@@ -35,6 +34,7 @@ class ItemsController {
             const newItem = {
                 name: req.body.name,
                 description: req.body.description || "",
+                done: req.body.done || false
             } as IItem;
 
             const createdItem = await this.itemService.create(newItem);
@@ -61,7 +61,6 @@ class ItemsController {
 
     public deleteItem: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            console.log(req.params.id)
             const deletedItem = await this.itemService.delete(req.params.id);
             res.send(deletedItem);
         } catch (error) {

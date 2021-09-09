@@ -58,6 +58,7 @@ describe("Items Controller", () => {
     const newItem = {
       name: "SomeItem",
       description: "someItem Description",
+      done: false
     };
 
     const req: any = {
@@ -67,6 +68,7 @@ describe("Items Controller", () => {
     const createdItem = {
       name: newItem.name,
       description: newItem.description,
+      done: newItem.done
     };
 
     itemService.create = jest.fn().mockImplementation((item: IItem) => {
@@ -89,6 +91,7 @@ describe("Items Controller", () => {
       body: {
         name: "SomeItemToUpdate",
         description: "descriptionToUpdate",
+        newItem: false
       },
     };
 

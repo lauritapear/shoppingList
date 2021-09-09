@@ -17,15 +17,17 @@ export function createItem(name, description) {
     type: actionTypes.CREATE_ITEM,
     name: name,
     description: description,
+    done: false
   };
 }
 
-export function updateItem(name, description, itemID) {
+export function updateItem(name, description, done, itemID) {
   return {
     type: actionTypes.UPDATE_ITEM,
     name: name,
     description: description,
-    itemID: itemID
+    itemID: itemID,
+    done:done
   };
 }
 

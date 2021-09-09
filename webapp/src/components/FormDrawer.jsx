@@ -36,8 +36,6 @@ export default function FormDrawer(props) {
       <Drawer
         anchor="right"
         open={props.open}
-        onEscapeKeyDown={handleDrawerClose}
-        onBackdropClick={handleDrawerClose}
       >
         {list("right")}
         <ItemForm formAction={props.formAction} onCancel={props.onToggleOpen} onAddItem={props.onAddItem} onUpdateItem={props.onUpdateItem} itemID={props.itemID}/>

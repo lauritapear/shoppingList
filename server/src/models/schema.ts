@@ -15,6 +15,10 @@ const schema = new Schema({
 	description: {
 		type: String,
 		required: [true],
+	},
+	done: {
+		type: String,
+		required: [true],
 	}
 }, { _id: false });
 

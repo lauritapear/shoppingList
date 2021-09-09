@@ -32,6 +32,7 @@ class ItemService implements IDataService<IItem> {
       _id: new Types.ObjectId().toHexString(),
       name: entity.name,
       description: entity.description,
+      done: entity.done
     });
 
     return newItem.save();
