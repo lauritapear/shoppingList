@@ -5,7 +5,8 @@ const initialState = {
   loading: false,
   error: false,
   openDrawer: false,
-  formAction: "",
+  formType: '',
+  itemID: null,
   itemsData: [],
 };
 
@@ -24,9 +25,12 @@ function handleToggleDrawer(state) {
   return updateObject(state, { openDrawer: !state.openDrawer });
 }
 
-function handleFormAction(state) {
-  const newAction = state;
-  return updateObject(state, { formAction: newAction });
+function handleFormTypeUpdate(state, formAction){
+  return updateObject(state, { formType: formAction });
+}
+
+function handleItemIdUpdate(state, id){
+  return updateObject(state, { itemID: id });
 }
 
 function setItems(state, itemsData) {
@@ -35,6 +39,7 @@ function setItems(state, itemsData) {
   let newData = [];
   sortedData.forEach((element) => {
     newData.push({
+      id: element._id,
       name: element.name,
       description: element.description,
     });
@@ -55,8 +60,10 @@ export function itemReducer(state = initialState, action) {
       return setItems(state, action.itemsData);
     case actionTypes.TOGGLE_OPEN_DRAWER:
       return handleToggleDrawer(state);
-    case actionTypes.SET_FORM_ACTION:
-      return handleFormAction(state, action.formAction);
+    case actionTypes.UPDATE_FORM_TYPE:
+      return handleFormTypeUpdate(state, action.formType);
+    case actionTypes.UPDATE_ITEM_ID:
+      return handleItemIdUpdate(state, action.itemID);
     default:
       return state;
   }

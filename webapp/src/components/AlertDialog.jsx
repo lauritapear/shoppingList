@@ -21,18 +21,15 @@ export default function AlertDialog(props) {
             padding: theme.spacing(0, 3),
           },
       }));
-  const [open, setOpen] = React.useState(true);
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+ 
 
   const classes = useStyles();
   return (
     <div>
       <Dialog
-        open={open}
-        onClose={handleClose}
+        open={props.openDialog}
+        onClose={props.toggleDialog}
         aria-labelledby="max-width-dialog-title"
         aria-describedby="alert-dialog-description"
         maxWidth='xs'
@@ -44,10 +41,10 @@ export default function AlertDialog(props) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>
+          <Button onClick={props.toggleDialog}>
             Cancel
           </Button>
-          <Button onClick={handleClose}
+          <Button onClick={props.handleDelete}
                 variant="contained"
                 color="primary">
             Delete

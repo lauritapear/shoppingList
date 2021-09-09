@@ -2,7 +2,8 @@ export const SET_STATE = 'SET_STATE';
 export const ACTION_START = 'ACTION_START';
 export const ACTION_FAIL = 'ACTION_FAIL';
 export const TOGGLE_OPEN_DRAWER = 'TOGGLE_OPEN_DRAWER';
-export const SET_FORM_ACTION = 'SET_FORM_ACTION';
+export const UPDATE_FORM_TYPE = 'UPDATE_FORM_TYPE';
+export const UPDATE_ITEM_ID = 'UPDATE_ITEM_ID';
 
 //Create Item
 export const CREATE_ITEM = 'CREATE_ITEM';

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   Button,
   TextField,
@@ -58,24 +58,19 @@ export default function ItemForm(props) {
     },
   }));
 
-  
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
 
   const handleSubmit = () => {
     if(props.formAction === 'Add'){
-      props.createItem("tomate","tomate");
-    }else{
-      props.updateItem("tomate","tomate");
+      props.onAddItem(name,description);
+    }else if(props.formAction === 'Edit'){
+      props.onUpdateItem(name,description, props.itemID);
     }
-    
   };
 
   const handleCancel = () => {
     props.onCancel();
-  };
-
-  const handleInput = (evt) => {
-    // const name = evt.target.name;
-    // const newValue = evt.target.value;
   };
 
   const classes = useStyles();
@@ -102,7 +97,7 @@ export default function ItemForm(props) {
               variant="outlined"
               // defaultValue={formInput.name}
               className={classes.textField}
-              onChange={handleInput}
+              onChange={e => setName(e.target.value)}
             />
           </div>
           <div className={classes.paper}>
@@ -115,6 +110,7 @@ export default function ItemForm(props) {
               // defaultValue={formInput.description}
               variant="outlined"
               inputProps={{ maxLength: 100 }}
+              onChange={e => setDescription(e.target.value)}
             />
           </div>
           <div className={classes.paper}>
@@ -148,7 +144,7 @@ export default function ItemForm(props) {
                 color="primary"
                 className={classes.button}
               >
-                {props.formName} Item
+                {props.formAction} Item
               </Button>
             </div>
           </div>

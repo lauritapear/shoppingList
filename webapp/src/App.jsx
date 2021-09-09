@@ -11,13 +11,18 @@ class App extends Component {
   componentDidMount() {
     this.props.getItems(0,20);
   }
+  componentShouldUpdate() {
+    this.props.getItems(0,20);
+  }
   render() {
     let contentItem = null;
   
-    if(this.props.itemsData === 0 ) {
-      contentItem = <Content onToggleOpen={this.props.toggleOpenDrawer} />
+    if(this.props.itemsData.length === 0 ) {
+      contentItem = <Content onToggleOpen={this.props.toggleOpenDrawer} updateFormType={this.props.updateFormType}/>
+      // contentItem = <Content {...this.props}/>
     }else{
-      contentItem = <ShoppingList items={this.props.itemsData} openEditForm={this.props.toggleOpenDrawer} />
+    //   // contentItem = <ShoppingList items={this.props.itemsData} openEditForm={this.props.toggleOpenDrawer} formAction={this.props.formType} />
+      contentItem = <ShoppingList {...this.props} />
     }
     return (
       <Grid container direction="column">
@@ -25,7 +30,10 @@ class App extends Component {
         <FormDrawer
           open={this.props.openDrawer}
           onToggleOpen={this.props.toggleOpenDrawer}
-          formAction={this.props.formAction}
+          formAction={this.props.formType}
+          onAddItem={this.props.createItem}
+          onUpdateItem={this.props.updateItem}
+          itemID={this.props.itemID}
         />
         <div>{contentItem}</div>
       </Grid>
@@ -39,7 +47,8 @@ function mapStateToProps(state) {
     error: state.itemReducer.error,
     itemsData: state.itemReducer.itemsData,
     openDrawer: state.itemReducer.openDrawer,
-    formAction: state.itemReducer.formAction
+    formType: state.itemReducer.formType,
+    itemID:state.itemReducer.itemID
   };
 }
 

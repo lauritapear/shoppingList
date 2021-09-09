@@ -1,7 +1,8 @@
 
 export {
     toggleOpenDrawer,
-    setFormAction,
+    updateFormType,
+    updateItemID,
     createItem,
     updateItem,
     deleteItem,

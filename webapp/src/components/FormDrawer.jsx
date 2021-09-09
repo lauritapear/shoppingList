@@ -15,10 +15,8 @@ const useStyles = makeStyles({
 
 export default function FormDrawer(props) {
   const classes = useStyles();
-  // const [drawerOpen, setDrawerOpen] = React.useState(props.open);
 
   const handleDrawerClose = () => {
-    // setDrawerOpen(false);
     props.onToggleOpen();
   };
 
@@ -42,7 +40,7 @@ export default function FormDrawer(props) {
         onBackdropClick={handleDrawerClose}
       >
         {list("right")}
-        <ItemForm formAction={props.formAction} onCancel={props.onToggleOpen}/>
+        <ItemForm formAction={props.formAction} onCancel={props.onToggleOpen} onAddItem={props.onAddItem} onUpdateItem={props.onUpdateItem} itemID={props.itemID}/>
       </Drawer>
     </div>
   );

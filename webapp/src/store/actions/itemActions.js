@@ -4,27 +4,30 @@ export function toggleOpenDrawer() {
   return { type: actionTypes.TOGGLE_OPEN_DRAWER };
 }
 
-export function setFormAction(formAction) {
-    return { type: actionTypes.SET_FORM_ACTION , formAction: formAction};
-  }
+export function updateFormType(formType) {
+  return { type: actionTypes.UPDATE_FORM_TYPE, formType };
+}
+
+export function updateItemID(itemID) {
+  return { type: actionTypes.UPDATE_ITEM_ID, itemID };
+}
 
 export function createItem(name, description) {
   return {
     type: actionTypes.CREATE_ITEM,
     name: name,
-    description: description
+    description: description,
   };
 }
 
-export function updateItem(name, description) {
+export function updateItem(name, description, itemID) {
   return {
     type: actionTypes.UPDATE_ITEM,
     name: name,
-    description: description
+    description: description,
+    itemID: itemID
   };
 }
-
-
 
 export function deleteItem(itemID) {
   return {
@@ -33,23 +36,22 @@ export function deleteItem(itemID) {
   };
 }
 
-  
-  export function setItemsData(itemsData) {
-    return {type: actionTypes.SET_ITEMS, itemsData};
-  }
+export function setItemsData(itemsData) {
+  return { type: actionTypes.SET_ITEMS, itemsData };
+}
 
-  export function getItems(pageNumber, pageSize) {
-    return {
-      type: actionTypes.GET_ITEMS,
-      pageNumber: pageNumber,
-      pageSize: pageSize
-    };
-  }
+export function getItems(pageNumber, pageSize) {
+  return {
+    type: actionTypes.GET_ITEMS,
+    pageNumber: pageNumber,
+    pageSize: pageSize,
+  };
+}
 
-  export function actionStart() {
-    return { type: actionTypes.ACTION_START };
-  }
-  
-  export function actionFailed(error) {
-    return { type: actionTypes.ACTION_FAIL, error };
-  }
+export function actionStart() {
+  return { type: actionTypes.ACTION_START };
+}
+
+export function actionFailed(error) {
+  return { type: actionTypes.ACTION_FAIL, error };
+}

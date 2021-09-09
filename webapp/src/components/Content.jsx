@@ -33,8 +33,10 @@ export default function Content(props) {
   const classes = useStyles();
 
   const handleAddItem = () => {
+    props.updateFormType('Add');
     props.onToggleOpen();
   };
+
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>

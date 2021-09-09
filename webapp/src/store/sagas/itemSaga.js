@@ -19,13 +19,13 @@ export function* getItemsSaga(action) {
 }
 
 export function* createItemSaga(action) {
+  console.log("in create SAGA")
   yield put(actions.actionStart());
   const url = "http://localhost:4000/api/items";
   try {
-    yield axios.post(url, {
-      
-        name:"tomate",
-        description: "tomate"
+    yield axios.post(url, {  
+        name:action.name,
+        description: action.description
       
     });
   } catch (error) {
@@ -35,17 +35,11 @@ export function* createItemSaga(action) {
 
 export function* updateItemSaga(action) {
   yield put(actions.actionStart());
-  const url = "http://localhost:3000/api/items";
+  const url = "http://localhost:4000/api/items/"+action.itemID;
   try {
     yield axios.patch(url, {
-      params: {
-        id: action.id,
-      },
-      body: {
         name: action.name,
-        description: action.description,
-        count: action.count,
-      },
+        description: action.description
     });
   } catch (error) {
     yield put(actions.actionFailed(error));
@@ -54,13 +48,9 @@ export function* updateItemSaga(action) {
 
 export function* deleteItemSaga(action) {
   yield put(actions.actionStart());
-  const url = "http://localhost:3000/api/items";
+  const url = "http://localhost:4000/api/items/"+action.itemID;
   try {
-    yield axios.delete(url, {
-      params: {
-        id: action.id,
-      },
-    });
+    yield axios.delete(url, {});
   } catch (error) {
     yield put(actions.actionFailed(error));
   }
