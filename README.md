@@ -11,6 +11,11 @@ Application to add items to shopping list
 
 And that is it 👏  you can now access shoppingList app on port 3000
 
+Note: you can always run the app simply by:
+- Navegate to ```service folder``` and enter : ```npm install``` and then ```npm start```
+- Navegate to ```webapp folder``` and enter : ```npm install``` and then ```npm start```
+- Port serving the app can be seen on terminal
+
 ## To run Test
 
 1. Navegate to ```service folder``` and enter : ```npm test```
