@@ -33,12 +33,15 @@ export default function FormDrawer(props) {
 
   return (
     <div>
-      <Drawer
-        anchor="right"
-        open={props.open}
-      >
+      <Drawer anchor="right" open={props.open}>
         {list("right")}
-        <ItemForm formAction={props.formAction} onCancel={props.onToggleOpen} onAddItem={props.onAddItem} onUpdateItem={props.onUpdateItem} itemID={props.itemID}/>
+        <ItemForm
+          formAction={props.formAction}
+          onCancel={props.onToggleOpen}
+          onAddItem={props.onAddItem}
+          onUpdateItem={props.onUpdateItem}
+          itemID={props.itemID}
+        />
       </Drawer>
     </div>
   );

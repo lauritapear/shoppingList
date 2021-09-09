@@ -7,19 +7,16 @@ import Spinner from "./Spinner";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    // flexGrow: 1,
-    // overflow: "hidden",
-    // padding: theme.spacing(0, 3),
     display: "flex",
     marginTop: 80,
-    minHeight: 350,
+    minHeight: 300,
   },
   paper: {
-    display:"flex",
-    padding: theme.spacing(4),
+    display: "flex",
+    padding: theme.spacing(2),
     margin: "0 auto",
-    minWidth: 500,
-    minHeight: 200
+    minWidth: 480,
+    minHeight: 150,
   },
   content: {
     display: "flex",

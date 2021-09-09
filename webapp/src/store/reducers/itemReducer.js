@@ -5,7 +5,7 @@ const initialState = {
   loading: false,
   error: false,
   openDrawer: false,
-  formType: '',
+  formType: "",
   itemID: null,
   itemsData: [],
 };
@@ -25,11 +25,11 @@ function handleToggleDrawer(state) {
   return updateObject(state, { openDrawer: !state.openDrawer });
 }
 
-function handleFormTypeUpdate(state, formAction){
+function handleFormTypeUpdate(state, formAction) {
   return updateObject(state, { formType: formAction });
 }
 
-function handleItemIdUpdate(state, id){
+function handleItemIdUpdate(state, id) {
   return updateObject(state, { itemID: id });
 }
 
@@ -41,7 +41,7 @@ function setItems(state, itemsData) {
       id: element._id,
       name: element.name,
       description: element.description,
-      done: (element.done === 'true')
+      done: element.done === "true",
     });
   });
   return updateObject(state, {

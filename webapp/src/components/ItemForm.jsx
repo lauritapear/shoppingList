@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import {
   Button,
   TextField,
@@ -23,9 +23,6 @@ export default function ItemForm(props) {
     iconSmall: {
       fontSize: 20,
     },
-    // root: {
-    //   padding: theme.spacing(3, 2)
-    // },
     container: {
       display: "flex",
       flexDirection: "column",
@@ -39,11 +36,7 @@ export default function ItemForm(props) {
       justifyContent: "flex-end",
     },
     textField: {
-      // marginLeft: theme.spacing(1),
-      // marginRight: theme.spacing(1),
-      // margin: `${theme.spacing(1)}px auto`,
-      // padding: theme.spacing(2),
-      width: 400,
+      width: 400
     },
     root: {
       flexGrow: 1,
@@ -58,14 +51,14 @@ export default function ItemForm(props) {
     },
   }));
 
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
 
   const handleSubmit = () => {
-    if(props.formAction === 'Add'){
-      props.onAddItem(name,description);
-    }else if(props.formAction === 'Edit'){
-      props.onUpdateItem(name,description, false, props.itemID);
+    if (props.formAction === "Add") {
+      props.onAddItem(name, description);
+    } else if (props.formAction === "Edit") {
+      props.onUpdateItem(name, description, false, props.itemID);
     }
   };
 
@@ -95,7 +88,7 @@ export default function ItemForm(props) {
               variant="outlined"
               // defaultValue={formInput.name}
               className={classes.textField}
-              onChange={e => setName(e.target.value)}
+              onChange={(e) => setName(e.target.value)}
             />
           </div>
           <div className={classes.paper}>
@@ -108,12 +101,14 @@ export default function ItemForm(props) {
               // defaultValue={formInput.description}
               variant="outlined"
               inputProps={{ maxLength: 100 }}
-              onChange={e => setDescription(e.target.value)}
+              onChange={(e) => setDescription(e.target.value)}
             />
           </div>
           <div className={classes.paper}>
             <FormControl variant="outlined" className={classes.textField}>
-              <InputLabel htmlFor="outlined-age-native-simple">How many?</InputLabel>
+              <InputLabel htmlFor="outlined-age-native-simple">
+                How many?
+              </InputLabel>
               <Select
                 native
                 // value={state.age}
@@ -133,7 +128,9 @@ export default function ItemForm(props) {
           </div>
           <div className={classes.buttonContainer}>
             <div className={classes.paper}>
-              <Button className={classes.button} onClick={handleCancel}>Cancel</Button>
+              <Button className={classes.button} onClick={handleCancel}>
+                Cancel
+              </Button>
             </div>
             <div className={classes.paper}>
               <Button

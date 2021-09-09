@@ -6,21 +6,25 @@ import Header from "./components/Header";
 import FormDrawer from "./components/FormDrawer";
 import Content from "./components/Content";
 import ShoppingList from "./components/ShoppingList";
-// import AlertDialog from "./components/AlertDialog";
+
 class App extends Component {
   componentDidMount() {
-    this.props.getItems(0,20);
+    this.props.getItems(0, 20);
   }
-  
+
   render() {
     let contentItem = null;
-  
-    if(this.props.itemsData.length === 0 ) {
-      contentItem = <Content onToggleOpen={this.props.toggleOpenDrawer} updateFormType={this.props.updateFormType} loading={this.props.loading}/>
-      // contentItem = <Content {...this.props}/>
-    }else{
-    //   // contentItem = <ShoppingList items={this.props.itemsData} openEditForm={this.props.toggleOpenDrawer} formAction={this.props.formType} />
-      contentItem = <ShoppingList {...this.props} />
+
+    if (this.props.itemsData.length === 0) {
+      contentItem = (
+        <Content
+          onToggleOpen={this.props.toggleOpenDrawer}
+          updateFormType={this.props.updateFormType}
+          loading={this.props.loading}
+        />
+      );
+    } else {
+      contentItem = <ShoppingList {...this.props} />;
     }
     return (
       <Grid container direction="column">
@@ -46,7 +50,7 @@ function mapStateToProps(state) {
     itemsData: state.itemReducer.itemsData,
     openDrawer: state.itemReducer.openDrawer,
     formType: state.itemReducer.formType,
-    itemID:state.itemReducer.itemID
+    itemID: state.itemReducer.itemID,
   };
 }
 

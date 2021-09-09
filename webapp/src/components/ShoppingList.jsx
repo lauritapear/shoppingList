@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ShoppingListItem from "./ShoppingListItem";
+import Typography from "@material-ui/core/Typography";
 import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import AlertDialog from "./AlertDialog";
@@ -24,6 +25,7 @@ export default function ShoppingList(props) {
       paddingRight: 48,
     },
     listTitle: {
+      marginTop: 60,
       display: "flex",
       flexDirection: "row",
       alignItems: "center",
@@ -36,12 +38,6 @@ export default function ShoppingList(props) {
       flexDirection: "column",
     },
   }));
-
-  useEffect(() => {
-    // const subscription = props.source.subscribe();
-
-    console.log("checked", props.clickedItem);
-  }, [props.clickedItem]);
 
   const classes = useStyles();
   const [openDialog, setOpenDialog] = React.useState(false);
@@ -66,8 +62,6 @@ export default function ShoppingList(props) {
     props.deleteItem(clickedItem.id);
   };
   const handleChecked = (item) => {
-    // console.log("checked ", Boolean(item.done));
-    // console.log("negation ", !item.done);
     props.updateItem(item.name, item.description, !item.done, item.id);
   };
 
@@ -95,7 +89,7 @@ export default function ShoppingList(props) {
     content = 
     <>
       <div className={classes.listTitle}>
-        <h2>Your Items</h2>
+      <Typography gutterBottom variant="h6">Your Items</Typography>
         <Button
           variant="contained"
           color="primary"

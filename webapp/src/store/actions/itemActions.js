@@ -17,7 +17,7 @@ export function createItem(name, description) {
     type: actionTypes.CREATE_ITEM,
     name: name,
     description: description,
-    done: false
+    done: false,
   };
 }
 
@@ -27,7 +27,7 @@ export function updateItem(name, description, done, itemID) {
     name: name,
     description: description,
     itemID: itemID,
-    done:done
+    done: done,
   };
 }
 
