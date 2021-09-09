@@ -4,7 +4,7 @@ Application to add items to shopping list
 
 ## To run Application 
 
-1. Add DB_NAME and DB_URL to  ```service/.env``` 
+1. Add DB_NAME and DB_URL to  ```service/.env.production``` 
 
 2. Once you have updated ```.env``` file please run:
    ```docker-compose up``` (Make sure docker is running on your machine)
