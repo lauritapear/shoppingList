@@ -4,6 +4,8 @@ Application to add items to shopping list
 
 ## To run Application 
 
+Important Note : Make sure a persintant mongo instance is not running on your machine when trying to run shoppingList App
+
 1. Add DB_NAME and DB_URL to  ```service/.env.development``` 
 
 2. Navegate to ```service folder``` and enter : ```npm install``` and then ```npm start``
