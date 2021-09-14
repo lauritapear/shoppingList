@@ -4,17 +4,18 @@ Application to add items to shopping list
 
 ## To run Application 
 
-1. Add DB_NAME and DB_URL to  ```service/.env``` 
+1. Add DB_NAME and DB_URL to  ```service/.env.development``` 
 
-2. Once you have updated ```.env``` file please run:
-   ```docker-compose up``` (Make sure docker is running on your machine)
+2. Navegate to ```service folder``` and enter : ```npm install``` and then ```npm start``
+
+3. Backend should be now up and running on port: 4000
+
+4. Navegate to ```webapp folder``` and enter : ```npm install``` and then ```npm start```
+
+5. Frontend should be now up and running on port: 3000
 
 And that is it 👏  you can now access shoppingList app on port 3000
 
-Note: you can always run the app simply by:
-- Navegate to ```service folder``` and enter : ```npm install``` and then ```npm start```
-- Navegate to ```webapp folder``` and enter : ```npm install``` and then ```npm start```
-- Port serving the app can be seen on terminal
 
 ## To run Test
 
@@ -26,5 +27,3 @@ Note: you can always run the app simply by:
 * Mongoose
 * NodeJS
 * Jest
-* Docker
-* Docker Compose
